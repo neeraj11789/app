@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RealTime Update Events</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<style type="text/css">
+	.navbar{
+		min-height: 80px;
+	}
+	.navbar-brand{
+		margin: auto;
+		font-size: 2.5rem;
+	}
+	.panel{
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	h3{
+		color: blue;
+	}
+	.pstyle{
+		font-size: 2rem;
+		font-family: verdana, sans-serif;
+	}
+
+
+
+</style>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+		$("button").click(function(){
+		    var vid =  $("input:text").val();
+			var urlEndPoint = 'http://localhost:8800/v1/vehicles/'+ vid +'/locations/subscribe';
+			var eventSource = new EventSource(urlEndPoint);
+			$('.panel-primary').text('Location Update Pings for ' + vid)
+
+			eventSource.addEventListener("msg", function(event){
+				console.log(event.data);
+				var l = JSON.parse(event.data);
+				addBlock(l.lat, l.lng, l.pingTime);
+			});
+
+			function addBlock(lat, lng, tme){
+				var a = document.createElement("location");
+				var h = document.createElement("H3");
+				var d = new Date(tme)
+				var t = document.createTextNode("New Location Update: " + lat + "," + lng + " at " + d);
+				h.append(t);
+				a.appendChild(h);
+				document.getElementById("pack").appendChild(a);
+			}
+		});
+	});
+
+</script>
+
+<body>
+<nav class="navbar navbar-default"></nav>
+<div class="container-fluid">
+    <div class="navbar-header">
+        <div class="navbar-brand">
+
+        </div>
+    </div>
+</div>
+<div class="container pstyle text-center" id="pack">
+    <p>VehicleId: <input type="text" name="vehicle"></p>
+    <button>Subscribe To Updates</button>
+    <br/>
+    <br/>
+    <div class="panel panel-primary">
+        Location Update Ping
+    </div>
+</div>
+
+</body>
+</html>
