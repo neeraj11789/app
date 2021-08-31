@@ -43,7 +43,7 @@
 		$(document).ready(function(){
 		$("button").click(function(){
 		    var vid =  $("input:text").val();
-			var urlEndPoint = 'http://localhost:8800/v1/vehicles/'+ vid +'/locations/subscribe';
+			var urlEndPoint = 'https://afternoon-wave-33826.herokuapp.com/v1/vehicles/'+ vid +'/locations/subscribe';
 			var eventSource = new EventSource(urlEndPoint);
 			$('.panel-primary').text('Location Update Pings for ' + vid)
 
