@@ -2,19 +2,15 @@
 <html>
 <head>
     <title>RealTime Update Events On Google Maps</title>
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzC2KuC_lu7CcjdzD8gA5MSbckipd4Hw&callback=initMap&libraries=&v=weekly"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzC2KuC_lu7CcjdzD8gA5MSbckipd4Hw&callback=initMap&libraries=&v=weekly"
             async
     ></script>
 
@@ -47,7 +43,7 @@
 		$(document).ready(function(){
             $("button").click(function(){
                 const vid =  $("input:text").val();
-                const urlEndPoint = 'http://localhost:8800/v1/vehicles/'+ vid +'/locations/subscribe';
+                const urlEndPoint = 'https://afternoon-wave-33826.herokuapp.com/v1/vehicles/'+ vid +'/locations/subscribe';
                 const eventSource = new EventSource(urlEndPoint);
                 $('.panel-primary').text('Location Update Ping ' + vid)
 
