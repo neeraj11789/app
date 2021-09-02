@@ -65,16 +65,18 @@
 
                 function initMap() {
                     // The location of Uluru
-                    const location = { lat: 52.53, lng: 13.403 };
-                    // The map, centered at D2D office
+                    const location = { lat: 52.45097, lng: 13.46139 };
+                    // The map, centered at Uluru
                     const map = new google.maps.Map(document.getElementById("map"), {
-                      zoom: 11,
+                      zoom: 16,
                       center: location,
                     });
+                    const iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
                     // The marker, positioned at Uluru
                     const marker = new google.maps.Marker({
                       position: location,
                       map: map,
+                      icon: iconBase + 'bus.png'
                     });
                     return marker;
                 }
